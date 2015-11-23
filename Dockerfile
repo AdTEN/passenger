@@ -28,7 +28,7 @@ RUN chmod +x /tini \
  && tar xzf "nginx-$NGINX.tar.gz" && rm "nginx-$NGINX.tar.gz" \
  && mv "nginx-$NGINX" /nginx && cd /nginx \
  && readonly NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
- && ./configure --prefix=/opt/nginx --add-module=$(passenger-config --nginx-addon-dir) --with-pcre-jit --with-ipv6 --without-http_fastcgi_module --without-http_scgi_module --without-http_uwsgi_module --with-http_ssl_module \
+ && ./configure --prefix=/opt/nginx --add-module=$(passenger-config --nginx-addon-dir) --with-pcre-jit --with-ipv6 --without-http_fastcgi_module --without-http_scgi_module --without-http_uwsgi_module --with-http_ssl_module --with-http_gzip_static_module \
  && make -j${NPROC} && make install \
  && apk del wget build-base linux-headers curl-dev pcre-dev libexecinfo-dev || true \
  && rm -rf /var/cache/apk/* /nginx \
